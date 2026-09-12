@@ -1,0 +1,46 @@
+/* Chan Lone Gold & Jewelery — design tokens (single source of truth) */
+:root {
+  /* Colors */
+  --color-black: #0a0a0a;
+  --color-black-soft: #141414;
+  --color-black-elevated: #1c1c1a;
+  --color-gold: #c9a227;
+  --color-gold-light: #e6c866;
+  --color-gold-muted: #8a7025;
+  --color-gold-dim: rgba(201, 162, 39, 0.35);
+  --color-ivory: #f5f1e8;
+  --color-white: #ffffff;
+  --color-gray: #9a9a92;
+  --color-gray-light: #cfcbc0;
+  --color-error: #c0392b;
+
+  /* Fonts */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Jost', 'Segoe UI', Arial, sans-serif;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* Radius */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+
+  /* Layout */
+  --container-max: 1280px;
+  --header-height: 84px;
+
+  /* Effects */
+  --transition-fast: 150ms ease;
+  --transition-med: 300ms ease;
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.45);
+  --shadow-modal: 0 20px 70px rgba(0, 0, 0, 0.7);
+  --border-hairline: 1px solid rgba(201, 162, 39, 0.4);
+}
