@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Product Admin — Chan Lone Gold & Jewelery</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Jost:wght@400;500;600&family=Noto+Sans+Myanmar:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body data-page="admin">
+
+<header class="admin-header">
+  <div class="container admin-header__inner">
+    <div>
+      <span class="admin-header__title">Product Admin</span>
+      <span class="admin-header__sub">Developer tool — not part of the customer site</span>
+    </div>
+    <div class="admin-header__actions">
+      <span id="admin-user-email" class="admin-header__email" hidden></span>
+      <button type="button" class="btn btn--outline btn--sm" id="admin-logout" hidden>Log Out</button>
+      <a href="index.html" class="btn btn--ghost btn--sm">&larr; Back to site</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <!-- ---- Login screen ---- -->
+    <section id="admin-login" class="admin-login" hidden>
+      <div class="admin-login__box">
+        <h2>Sign In</h2>
+        <p class="admin-login__hint">This dashboard is protected by Firebase Authentication. Only the one admin account created for this project (see FIREBASE_SETUP.md) can sign in and make changes.</p>
+        <form id="admin-login-form">
+          <div class="admin-field">
+            <label for="admin-email">Email</label>
+            <input type="email" id="admin-email" autocomplete="username" required>
+          </div>
+          <div class="admin-field">
+            <label for="admin-password">Password</label>
+            <input type="password" id="admin-password" autocomplete="current-password" required>
+          </div>
+          <p id="admin-login-error" class="admin-login__error" hidden></p>
+          <button type="submit" class="btn btn--primary btn--block" id="admin-login-submit">Sign In</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ---- Not-configured screen ---- -->
+    <section id="admin-not-configured" class="admin-notice" hidden>
+      <p><strong>Firebase isn't configured yet.</strong> This page can't sign in or load products until <code>js/firebase-config.js</code> has your real Firebase project values.</p>
+      <p>Follow <code>FIREBASE_SETUP.md</code> in the project folder, then reload this page.</p>
+    </section>
+
+    <!-- ---- Dashboard ---- -->
+    <section id="admin-dashboard" hidden>
+      <div class="admin-toolbar">
+        <input type="search" id="admin-search" placeholder="Search products by name or ID…" />
+        <span id="admin-status" class="admin-edit-count"></span>
+        <div class="admin-toolbar__actions">
+          <button type="button" class="btn btn--outline btn--sm" id="admin-import-seed">Import Starter Catalog</button>
+          <button type="button" class="btn btn--primary btn--sm" id="admin-add-product">+ Add New Product</button>
+        </div>
+      </div>
+
+      <div class="admin-grid" id="admin-grid"></div>
+      <p id="admin-empty" class="admin-empty-note" hidden>No products yet — click "Add New Product" or "Import Starter Catalog" above to get started.</p>
+    </section>
+
+  </div>
+</main>
+
+<template id="admin-card-template">
+  <article class="admin-card">
+    <span class="admin-card__badge" data-unsaved hidden>Unsaved</span>
+    <div class="admin-card__media" data-media></div>
+    <div class="admin-card__file-row">
+      <input type="file" accept="image/*" data-file-input>
+      <span class="admin-card__uploading" data-uploading hidden>Uploading…</span>
+    </div>
+    <div class="admin-card__thumbs" data-thumbs></div>
+
+    <div class="admin-field">
+      <label>Name (English)</label>
+      <input type="text" data-field="name">
+    </div>
+    <div class="admin-field">
+      <label>Name (Burmese)</label>
+      <input type="text" lang="my" data-field="nameBurmese">
+    </div>
+    <div class="admin-field admin-field--row">
+      <div>
+        <label>Category</label>
+        <select data-field="category"></select>
+      </div>
+      <div>
+        <label>Material</label>
+        <select data-field="material"></select>
+      </div>
+    </div>
+    <div class="admin-field admin-field--checks">
+      <label><input type="checkbox" data-field="isNew"> New</label>
+      <label><input type="checkbox" data-field="isFeatured"> Featured</label>
+    </div>
+    <div class="admin-field">
+      <label>Short Description</label>
+      <textarea data-field="shortDescription"></textarea>
+    </div>
+    <div class="admin-field">
+      <label>Full Description</label>
+      <textarea data-field="description"></textarea>
+    </div>
+    <div class="admin-field">
+      <label>Tags (comma separated)</label>
+      <input type="text" data-field="tagsText">
+    </div>
+
+    <div class="admin-card__footer">
+      <button type="button" class="btn btn--outline btn--sm" data-delete>Delete</button>
+      <button type="button" class="btn btn--primary btn--sm" data-save>Save</button>
+    </div>
+  </article>
+</template>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-storage-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/data/taxonomy.js"></script>
+<script src="js/data/seed-products.js"></script>
+<script src="js/modules/utils.js"></script>
+<script src="js/modules/render.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

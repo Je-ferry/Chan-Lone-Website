@@ -7,7 +7,7 @@ window.BUSINESS = {
   name: "Chan Lone Gold & Jewelery",
   nameBurmese: "ချန်းလုံရွှေဆိုင်",
   tagline: "Fine Gold & Jewelery, Crafted for Generations",
-  address: "C7, Ujana Plaza, 1st Floor, Near Central Bank, Yangon, Myanmar",
+  address: "C7, Yuzana Plaza, 1st Floor, Yangon, Myanmar",
   facebookUrl: "https://www.facebook.com/chanlonjewelry",
   messengerUrl: "https://m.me/chanlonjewelry",
   phone: "[PHONE_PLACEHOLDER]",
@@ -18,5 +18,5 @@ window.BUSINESS = {
     { day: "Monday – Saturday", time: "[HOURS_PLACEHOLDER]" },
     { day: "Sunday", time: "[HOURS_PLACEHOLDER]" }
   ],
-  mapQuery: "Ujana Plaza, Yangon, Myanmar"
+  mapQuery: "Yuzana Plaza, Yangon, Myanmar"
 };

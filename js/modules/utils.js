@@ -1,9 +1,5 @@
 /** Shared small helpers used across pages. */
 window.ChanLoneUtils = (function () {
-  function formatPrice(amount, currency) {
-    return (currency || "MMK") + " " + Number(amount).toLocaleString("en-US");
-  }
-
   function getParam(name) {
     return new URLSearchParams(window.location.search).get(name);
   }
@@ -65,7 +61,6 @@ window.ChanLoneUtils = (function () {
   }
 
   return {
-    formatPrice: formatPrice,
     getParam: getParam,
     getParamList: getParamList,
     setQueryParams: setQueryParams,

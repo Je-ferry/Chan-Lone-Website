@@ -50,7 +50,7 @@ window.ChanLoneRender = (function () {
         '<div class="product-card__body">' +
           '<span class="product-card__category">' + U.escapeHtml(U.categoryLabel(product.category)) + "</span>" +
           '<a class="product-card__name" href="product.html?id=' + product.id + '">' + U.escapeHtml(product.name) + "</a>" +
-          '<span class="product-card__price">' + U.formatPrice(product.price, product.currency) + "</span>" +
+          (product.nameBurmese ? '<span class="product-card__name-burmese" lang="my">' + U.escapeHtml(product.nameBurmese) + "</span>" : "") +
         "</div>" +
       "</article>"
     );
@@ -105,7 +105,7 @@ window.ChanLoneRender = (function () {
         '<div class="product-detail__info">' +
           '<span class="eyebrow">' + U.escapeHtml(U.categoryLabel(product.category)) + "</span>" +
           "<h1>" + U.escapeHtml(product.name) + "</h1>" +
-          '<div class="product-detail__price">' + U.formatPrice(product.price, product.currency) + "</div>" +
+          (product.nameBurmese ? '<p class="product-detail__name-burmese" lang="my">' + U.escapeHtml(product.nameBurmese) + "</p>" : "") +
           '<div class="product-detail__meta">' +
             '<span class="badge badge--material">' + U.escapeHtml(U.materialLabel(product.material)) + "</span>" +
             (product.isNew ? '<span class="badge badge--new">New</span>' : "") +

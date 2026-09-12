@@ -1,28 +1,22 @@
 HOW TO ADD REAL PRODUCT PHOTOS
 ===============================
 
-Right now every product shows a styled placeholder (gold gradient + a line-icon
-of a ring/necklace/bracelet/earring + "Photo coming soon") because we could
-not automatically pull real photos from the Facebook page.
+Product photos are no longer stored in this folder or referenced by a
+file path in code -- they're uploaded straight to Firebase Storage
+through the admin dashboard.
 
-To swap in a real photo for a product:
+1. Complete FIREBASE_SETUP.md (one-time), if you haven't already.
+2. Open admin.html and sign in.
+3. Find the product (or click "+ Add New Product"), choose a photo file
+   next to it, and it uploads and appears immediately -- on that product
+   card, and live on the public site (home, shop grid, quick view,
+   product page) as soon as you reload.
+4. To remove a photo, hover its thumbnail on the product's card in
+   admin.html and click the x.
 
-1. Get the photo (from the Facebook page, or a new photo you take).
-   Recommended: square image, at least 1000x1000px, JPG or WebP.
+Until a product has a photo, every page shows a styled placeholder (gold
+gradient + a line-icon of a ring/necklace/bracelet/earring +
+"Photo coming soon") automatically -- that's normal, not an error.
 
-2. Save it into this folder as: images/products/<product-id>-1.jpg
-   Example: images/products/rg-001-1.jpg
-   (Product IDs are in js/data/products.js, e.g. "rg-001", "nk-003".)
-
-   You can add more than one photo per product, e.g. rg-001-2.jpg, rg-001-3.jpg.
-
-3. Open js/data/products.js and find that product's entry. Change:
-       images: []
-   to:
-       images: ["images/products/rg-001-1.jpg", "images/products/rg-001-2.jpg"]
-
-4. Save the file and refresh the page (or re-deploy) — the real photo will
-   replace the placeholder automatically everywhere that product appears
-   (home, shop grid, quick view, product page).
-
-That's it — no other code changes needed.
+The icons in images/placeholders/icons/ are used for those placeholders
+and are the only image files this project still keeps in the repo.
