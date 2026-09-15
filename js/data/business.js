@@ -15,8 +15,8 @@ window.BUSINESS = {
   whatsapp: "[WHATSAPP_PLACEHOLDER]",
   email: "[EMAIL_PLACEHOLDER]",
   hours: [
-    { day: "Monday – Saturday", time: "[HOURS_PLACEHOLDER]" },
-    { day: "Sunday", time: "[HOURS_PLACEHOLDER]" }
+    { day: "Monday – Sunday", time: "9:00 AM – 4:00 PM" }
   ],
-  mapQuery: "Yuzana Plaza, Yangon, Myanmar"
+  mapQuery: "Yuzana Plaza, Yangon, Myanmar",
+  mapUrl: "https://maps.app.goo.gl/4t4XF7RcrBPygXbZ7"
 };

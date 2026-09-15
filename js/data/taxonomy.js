@@ -4,10 +4,10 @@
  * redeploy if you ever need to add a category or material.
  */
 window.CATEGORIES = [
-  { id: "rings", label: "Rings" },
-  { id: "necklaces", label: "Necklaces" },
-  { id: "bracelets", label: "Bracelets" },
-  { id: "earrings", label: "Earrings" }
+  { id: "rings", label: "Rings", labelBurmese: "လက်စွပ်" },
+  { id: "necklaces", label: "Necklaces", labelBurmese: "ဆွဲကြိုး" },
+  { id: "bracelets", label: "Bracelets", labelBurmese: "လက်ကောက်" },
+  { id: "earrings", label: "Earrings", labelBurmese: "နားကပ်" }
 ];
 
 window.MATERIALS = [

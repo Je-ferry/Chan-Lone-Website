@@ -48,7 +48,8 @@ window.ChanLoneRender = (function () {
           '<span class="quickview-trigger">Quick View</span>' +
         "</div>" +
         '<div class="product-card__body">' +
-          '<span class="product-card__category">' + U.escapeHtml(U.categoryLabel(product.category)) + "</span>" +
+          '<span class="product-card__category">' + U.escapeHtml(U.categoryLabel(product.category)) +
+            ' <span lang="my">(' + U.escapeHtml(U.categoryLabelBurmese(product.category)) + ")</span></span>" +
           '<a class="product-card__name" href="product.html?id=' + product.id + '">' + U.escapeHtml(product.name) + "</a>" +
           (product.nameBurmese ? '<span class="product-card__name-burmese" lang="my">' + U.escapeHtml(product.nameBurmese) + "</span>" : "") +
         "</div>" +
@@ -103,7 +104,8 @@ window.ChanLoneRender = (function () {
           '<div class="product-detail__gallery">' + galleryHtml + "</div>" +
         "</div>" +
         '<div class="product-detail__info">' +
-          '<span class="eyebrow">' + U.escapeHtml(U.categoryLabel(product.category)) + "</span>" +
+          '<span class="eyebrow">' + U.escapeHtml(U.categoryLabel(product.category)) +
+            ' <span lang="my">(' + U.escapeHtml(U.categoryLabelBurmese(product.category)) + ")</span></span>" +
           "<h1>" + U.escapeHtml(product.name) + "</h1>" +
           (product.nameBurmese ? '<p class="product-detail__name-burmese" lang="my">' + U.escapeHtml(product.nameBurmese) + "</p>" : "") +
           '<div class="product-detail__meta">' +

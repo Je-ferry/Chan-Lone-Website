@@ -44,6 +44,11 @@ window.ChanLoneUtils = (function () {
     return cat ? cat.label : id;
   }
 
+  function categoryLabelBurmese(id) {
+    var cat = (window.CATEGORIES || []).find(function (c) { return c.id === id; });
+    return cat ? cat.labelBurmese : "";
+  }
+
   function materialLabel(id) {
     var mat = (window.MATERIALS || []).find(function (m) { return m.id === id; });
     return mat ? mat.label : id;
@@ -67,6 +72,7 @@ window.ChanLoneUtils = (function () {
     debounce: debounce,
     escapeHtml: escapeHtml,
     categoryLabel: categoryLabel,
+    categoryLabelBurmese: categoryLabelBurmese,
     materialLabel: materialLabel,
     categoryIconPath: categoryIconPath
   };

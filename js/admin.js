@@ -213,7 +213,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function populateSelect(select, list, selected) {
     select.innerHTML = list.map(function (item) {
-      return '<option value="' + item.id + '"' + (item.id === selected ? " selected" : "") + ">" + U.escapeHtml(item.label) + "</option>";
+      var text = item.label + (item.labelBurmese ? " (" + item.labelBurmese + ")" : "");
+      return '<option value="' + item.id + '"' + (item.id === selected ? " selected" : "") + ">" + U.escapeHtml(text) + "</option>";
     }).join("");
   }
 
