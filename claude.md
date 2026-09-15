@@ -50,6 +50,22 @@ server-rendering, no bundler, and no CI/build step.
 - Every product has a `nameBurmese` field alongside `name`, rendered under
   the English name (product cards and product detail) with `lang="my"` so
   it picks up the Myanmar font already set up in `base.css`.
+- Categories in `js/data/taxonomy.js` (`window.CATEGORIES`) carry both
+  `label` (English) and `labelBurmese`, read via
+  `ChanLoneUtils.categoryLabel()` / `categoryLabelBurmese()`. Everywhere a
+  category name is shown to customers (main nav, mobile nav, footer,
+  homepage category tiles, shop filter sidebar, product card/detail tags)
+  it's rendered bilingually as `English <span lang="my">(Burmese)</span>`
+  — keep new category-facing UI consistent with that pattern. The header
+  logo (`.brand__name`) also shows the Burmese business name; because
+  Myanmar script needs more vertical room than the tight header
+  line-height, `.brand__name[lang="my"]` in `css/layout.css` overrides
+  `line-height`/`margin-bottom` so its diacritics don't collide with the
+  `.brand__sub` line below — keep that override if the header markup
+  changes.
+- `about.html`'s story section pairs each English paragraph with its
+  Burmese translation directly beneath it (`lang="my"`), matching the
+  English-primary/Burmese-secondary pattern used for product names.
 
 ## Product data backend (GitHub Contents API)
 - **`js/data/products.json`** holds the whole product catalog as a plain
@@ -89,10 +105,12 @@ server-rendering, no bundler, and no CI/build step.
   "Import Starter Catalog" button — not used anywhere else.
 
 ## Real vs. placeholder content
-Only the business name, Burmese name, and address are confirmed real (from
-the Facebook page). Phone, hours, product catalog/photos and the Burmese
-product names are placeholders — see `progress.md` for the full swap-in
-checklist.
+The business name, Burmese name, address, store hours (Monday–Sunday,
+9:00 AM – 4:00 PM), and Google Maps location (`BUSINESS.mapUrl` in
+`js/data/business.js`, also linked from `contact.html`) are confirmed
+real, owner-provided. Phone, Viber/WhatsApp, email, the product
+catalog/photos, and the Burmese product names are still placeholders —
+see `progress.md` for the full swap-in checklist.
 
 ## Hosting
 Deployed live on GitHub Pages at `https://je-ferry.github.io/Chan-Lone-Website/`
