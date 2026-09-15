@@ -11,11 +11,11 @@ document.addEventListener("DOMContentLoaded", function () {
   var categoryRadios = document.querySelectorAll('input[name="category"]');
   var materialChecks = document.querySelectorAll('input[name="material"]');
   var filterToggle = document.getElementById("filter-toggle");
-  var filterPanel = document.getElementById("filter-panel");
+  var filterSidebar = document.getElementById("filter-sidebar");
 
-  if (filterToggle && filterPanel) {
+  if (filterToggle && filterSidebar) {
     filterToggle.addEventListener("click", function () {
-      var isOpen = filterPanel.classList.toggle("is-open");
+      var isOpen = filterSidebar.classList.toggle("is-open");
       filterToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
   }
