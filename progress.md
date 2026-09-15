@@ -27,6 +27,15 @@
   detail and Quick View views also got a clickable thumbnail strip so
   visitors can jump straight to any uploaded photo instead of only
   seeing the rotation
+- Shop page on mobile/tablet (under 1024px width) now shows the product
+  grid first: the category/material filter sidebar is hidden behind a
+  "Filters" toggle button instead of rendering fully expanded above the
+  products
+- Fixed the mobile hamburger menu icon being completely invisible on
+  phones (the svg had no explicit size, which collapses to 0×0 in flex
+  layouts on mobile Safari)
+- Added a back button (browser back, or home if there's no history) next
+  to the logo in the header on every page
 
 ## TODO before this goes live for real customers
 - [ ] Delete the blank "New Product" test entry in `admin.html` (created while testing the GitHub connection — no real content, safe to remove)
