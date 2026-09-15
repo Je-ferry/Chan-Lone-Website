@@ -1,7 +1,7 @@
 [
   {
     "id": "new-product-3",
-    "name": "New Product",
+    "name": "Necklace 3",
     "nameBurmese": "",
     "category": "rings",
     "material": "22k-gold",
@@ -11,11 +11,11 @@
       "images/products/new-product-3/1789439418761-h8b1h.jpg",
       "images/products/new-product-3/1789439420647-yel2i.jpg"
     ],
-    "shortDescription": "",
+    "shortDescription": "Product Admin — Chan Lone Gold & Jewelery",
     "description": "",
     "tags": [],
     "createdAt": "2026-09-15T02:04:48.491Z",
-    "updatedAt": "2026-09-15T02:30:21.625Z"
+    "updatedAt": "2026-09-15T02:30:38.454Z"
   },
   {
     "id": "new-product-2",
