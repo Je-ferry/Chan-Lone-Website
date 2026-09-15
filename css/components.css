@@ -181,8 +181,6 @@
 .placeholder-media--lg svg { width: 26%; height: 26%; }
 
 /* ---- Filter sidebar ---- */
-.filter-toggle { display: none; }
-
 .filter-block { padding-bottom: var(--space-6); margin-bottom: var(--space-6); border-bottom: 1px solid rgba(255,255,255,0.08); }
 .filter-block:last-child { border-bottom: none; }
 .filter-block h4 { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-gold-light); margin-bottom: var(--space-4); }
