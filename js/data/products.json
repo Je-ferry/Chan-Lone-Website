@@ -3,7 +3,7 @@
     "id": "new-product-3",
     "name": "Necklace 3",
     "nameBurmese": "",
-    "category": "rings",
+    "category": "necklaces",
     "material": "22k-gold",
     "isNew": true,
     "isFeatured": false,
@@ -15,7 +15,7 @@
     "description": "",
     "tags": [],
     "createdAt": "2026-09-15T02:04:48.491Z",
-    "updatedAt": "2026-09-15T02:30:43.327Z"
+    "updatedAt": "2026-09-15T02:34:57.818Z"
   },
   {
     "id": "new-product-2",
