@@ -95,8 +95,8 @@ product names are placeholders — see `progress.md` for the full swap-in
 checklist.
 
 ## Hosting
-Static front end deployed via GitHub Pages (free) — see `README.md` for
-deploy steps; no build/CI step required, Pages serves the repo files
-directly. Before the admin panel will work, you also need to complete the
-one-time `GITHUB_SETUP.md` steps (fill in `js/github-config.js`, create a
-personal access token).
+Deployed live on GitHub Pages at `https://je-ferry.github.io/Chan-Lone-Website/`
+— see `README.md` for deploy steps; no build/CI step required, Pages serves
+the repo files directly. `GITHUB_SETUP.md` is complete: `js/github-config.js`
+points at the real repo (`Je-ferry/Chan-Lone-Website`), and the owner has a
+personal access token connected in `admin.html`.
