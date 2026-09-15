@@ -346,8 +346,6 @@
     font-family: var(--font-display);
     font-size: 0.9rem;
   }
-  .filter-toggle__icon { width: 16px; height: 16px; transition: transform 0.2s ease; }
-  .filter-toggle[aria-expanded="true"] .filter-toggle__icon { transform: rotate(180deg); }
 }
 
 @media (max-width: 780px) {
