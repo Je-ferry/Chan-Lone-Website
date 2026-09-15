@@ -3,7 +3,7 @@
     "id": "new-product",
     "name": "New Product",
     "nameBurmese": "",
-    "category": "rings",
+    "category": "necklaces",
     "material": "22k-gold",
     "isNew": true,
     "isFeatured": false,
@@ -14,6 +14,6 @@
     "description": "",
     "tags": [],
     "createdAt": "2026-09-15T00:13:58.475Z",
-    "updatedAt": "2026-09-15T01:48:05.304Z"
+    "updatedAt": "2026-09-15T01:48:13.947Z"
   }
 ]
