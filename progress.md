@@ -18,6 +18,15 @@
   translation paired under each paragraph
 - Real store hours set (Monday–Sunday, 9:00 AM – 4:00 PM) and a real
   Google Maps link/directions button added on the Contact page
+- Admin photo uploads now support selecting multiple photos at once
+  (uploaded one at a time), and the admin card previews a just-uploaded
+  photo immediately instead of showing broken/missing images while
+  viewing `admin.html` over `file://` or waiting on a Pages redeploy
+- Products with more than one photo auto-rotate through all of them
+  (product cards, shop/home grids, product detail, Quick View); the
+  detail and Quick View views also got a clickable thumbnail strip so
+  visitors can jump straight to any uploaded photo instead of only
+  seeing the rotation
 
 ## TODO before this goes live for real customers
 - [ ] Delete the blank "New Product" test entry in `admin.html` (created while testing the GitHub connection — no real content, safe to remove)

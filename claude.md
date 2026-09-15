@@ -66,6 +66,21 @@ server-rendering, no bundler, and no CI/build step.
 - `about.html`'s story section pairs each English paragraph with its
   Burmese translation directly beneath it (`lang="my"`), matching the
   English-primary/Burmese-secondary pattern used for product names.
+- A product can have multiple photos (`product.images` is an array,
+  first = cover). `js/modules/render.js`'s `productMedia()` is the only
+  place that decides how to display them — when there's more than one it
+  builds a `.product-media-rotator` (all `<img>`s stacked, one
+  `.is-active`) instead of a single `<img>`, used by both product cards
+  and the detail/quick-view gallery. One shared `setInterval` in
+  `render.js` advances every `.product-media-rotator` on the page every
+  3s by reading whichever image is currently `.is-active` — deliberately
+  not one timer per card, since grids re-render on every filter/sort and
+  per-element timers would keep ticking against detached nodes. On the
+  detail/quick-view gallery, a `.product-detail__thumbs` strip (click a
+  thumb, or the main photo, to jump to it) writes to that same
+  `.is-active` state, so manual picks and the auto-rotate timer don't
+  fight each other. Keep new multi-photo UI going through this shared
+  state instead of adding a separate current-index variable.
 
 ## Product data backend (GitHub Contents API)
 - **`js/data/products.json`** holds the whole product catalog as a plain
@@ -103,6 +118,19 @@ server-rendering, no bundler, and no CI/build step.
   "update it in all HTML files" list). `js/data/seed-products.js`
   (`SEED_PRODUCTS`) is loaded only by `admin.html`, for its one-click
   "Import Starter Catalog" button — not used anywhere else.
+- The photo `<input>` in each admin card is `multiple` — selected files
+  upload one at a time, not in parallel (`commitProducts` is
+  read-modify-write against `products.json`'s `sha`, so concurrent writes
+  would race each other). A failure partway through a batch doesn't stop
+  the rest; failures are collected and reported together at the end.
+  Because uploaded photos commit straight to GitHub and never touch local
+  disk, a freshly-committed path can't resolve as an `<img src>` yet —
+  either because `admin.html` is open via `file://` (nothing local
+  exists) or because GitHub Pages hasn't redeployed yet. `js/admin.js`
+  works around this with a per-card `photoPreviews` map (path -> the
+  data URL already in memory from `compressImageToFit`), so a card shows
+  its own just-uploaded photo immediately; it self-heals to the real
+  hosted file on the next full reload.
 
 ## Real vs. placeholder content
 The business name, Burmese name, address, store hours (Monday–Sunday,
