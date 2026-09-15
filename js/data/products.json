@@ -7,14 +7,12 @@
     "material": "22k-gold",
     "isNew": true,
     "isFeatured": false,
-    "images": [
-      "images/products/new-product-4/1789439861735-biseq.jpg"
-    ],
+    "images": [],
     "shortDescription": "",
     "description": "",
     "tags": [],
     "createdAt": "2026-09-15T02:37:15.545Z",
-    "updatedAt": "2026-09-15T02:37:48.509Z"
+    "updatedAt": "2026-09-15T02:37:56.221Z"
   },
   {
     "id": "new-product-3",
