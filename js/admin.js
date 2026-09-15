@@ -218,22 +218,32 @@ document.addEventListener("DOMContentLoaded", function () {
     }).join("");
   }
 
-  function renderMedia(card, product) {
+  // Uploaded photos are committed straight to GitHub (see file header) and
+  // never touch local disk, so a path like "images/products/<id>/x.jpg"
+  // can't resolve when admin.html is opened via file:// (and may not be
+  // live on GitHub Pages yet either, mid-redeploy). `photoPreviews` maps
+  // a just-uploaded path to the data URL already sitting in memory from
+  // compression, so the card can show it immediately regardless — it self-
+  // heals to the real hosted file on next page load.
+  function renderMedia(card, product, photoPreviews) {
     var mediaEl = card.querySelector("[data-media]");
-    mediaEl.innerHTML = (product.images && product.images.length)
-      ? '<img src="' + product.images[0] + '" alt="">'
+    var firstPath = product.images && product.images[0];
+    var src = firstPath && ((photoPreviews && photoPreviews[firstPath]) || firstPath);
+    mediaEl.innerHTML = src
+      ? '<img src="' + src + '" alt="">'
       : window.ChanLoneRender.placeholderMedia(product);
   }
 
-  function renderThumbs(card, product) {
+  function renderThumbs(card, product, photoPreviews) {
     var thumbsEl = card.querySelector("[data-thumbs]");
     thumbsEl.innerHTML = "";
     (product.images || []).forEach(function (path, idx) {
       var thumb = document.createElement("div");
       thumb.className = "admin-card__thumb";
-      thumb.innerHTML = '<img src="' + path + '" alt=""><button type="button" aria-label="Remove photo">&times;</button>';
+      var src = (photoPreviews && photoPreviews[path]) || path;
+      thumb.innerHTML = '<img src="' + src + '" alt=""><button type="button" aria-label="Remove photo">&times;</button>';
       thumb.querySelector("button").addEventListener("click", function () {
-        removeImage(product, idx, card);
+        removeImage(product, idx, card, photoPreviews);
       });
       thumbsEl.appendChild(thumb);
     });
@@ -242,9 +252,10 @@ document.addEventListener("DOMContentLoaded", function () {
   function createCard(product) {
     var card = cardTemplate.content.firstElementChild.cloneNode(true);
     card.dataset.id = product.id;
+    var photoPreviews = {};
 
-    renderMedia(card, product);
-    renderThumbs(card, product);
+    renderMedia(card, product, photoPreviews);
+    renderThumbs(card, product, photoPreviews);
 
     populateSelect(card.querySelector('[data-field="category"]'), window.CATEGORIES, product.category);
     populateSelect(card.querySelector('[data-field="material"]'), window.MATERIALS, product.material);
@@ -288,12 +299,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 : p;
             });
           }, "Add photo reference for " + (product.name || product.id));
+        }).then(function (updated) {
+          photoPreviews[path] = dataUrl;
+          return updated;
         });
       }).then(function (updated) {
         var updatedProduct = updated.find(function (p) { return p.id === product.id; });
         Object.assign(product, updatedProduct);
-        renderMedia(card, product);
-        renderThumbs(card, product);
+        renderMedia(card, product, photoPreviews);
+        renderThumbs(card, product, photoPreviews);
       }).catch(function (err) {
         handleWriteError(err, "Photo upload failed");
       }).finally(function () {
@@ -335,7 +349,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function removeImage(product, idx, card) {
+  function removeImage(product, idx, card, photoPreviews) {
     if (!confirm("Remove this photo?")) return;
     var path = product.images[idx];
     commitProducts(function (current) {
@@ -347,8 +361,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }, "Remove photo from " + (product.name || product.id)).then(function (updated) {
       var updatedProduct = updated.find(function (p) { return p.id === product.id; });
       Object.assign(product, updatedProduct);
-      renderMedia(card, product);
-      renderThumbs(card, product);
+      renderMedia(card, product, photoPreviews);
+      renderThumbs(card, product, photoPreviews);
       GH.getFile(path).then(function (file) {
         if (file) return GH.deleteFile(path, file.sha, "Delete removed image " + path);
       }).catch(function (err) {
