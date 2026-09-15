@@ -10,6 +10,15 @@ document.addEventListener("DOMContentLoaded", function () {
   var clearBtn = document.getElementById("clear-filters");
   var categoryRadios = document.querySelectorAll('input[name="category"]');
   var materialChecks = document.querySelectorAll('input[name="material"]');
+  var filterToggle = document.getElementById("filter-toggle");
+  var filterPanel = document.getElementById("filter-panel");
+
+  if (filterToggle && filterPanel) {
+    filterToggle.addEventListener("click", function () {
+      var isOpen = filterPanel.classList.toggle("is-open");
+      filterToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+  }
 
   window.ChanLoneProductsStore.fetchAll().then(function (products) {
     function readStateFromUrl() {

@@ -86,22 +86,28 @@
     <div class="container">
       <div class="shop-layout">
         <aside>
-          <div class="filter-block">
-            <h4>Category</h4>
-            <label class="filter-option"><input type="radio" name="category" value="" checked> All Categories</label>
-            <label class="filter-option"><input type="radio" name="category" value="rings"> Rings <span lang="my">(လက်စွပ်)</span></label>
-            <label class="filter-option"><input type="radio" name="category" value="necklaces"> Necklaces <span lang="my">(ဆွဲကြိုး)</span></label>
-            <label class="filter-option"><input type="radio" name="category" value="bracelets"> Bracelets <span lang="my">(လက်ကောက်)</span></label>
-            <label class="filter-option"><input type="radio" name="category" value="earrings"> Earrings <span lang="my">(နားကပ်)</span></label>
+          <button type="button" class="filter-toggle" id="filter-toggle" aria-expanded="false" aria-controls="filter-panel">
+            <span>Filters</span>
+            <svg class="filter-toggle__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="filter-panel" id="filter-panel">
+            <div class="filter-block">
+              <h4>Category</h4>
+              <label class="filter-option"><input type="radio" name="category" value="" checked> All Categories</label>
+              <label class="filter-option"><input type="radio" name="category" value="rings"> Rings <span lang="my">(လက်စွပ်)</span></label>
+              <label class="filter-option"><input type="radio" name="category" value="necklaces"> Necklaces <span lang="my">(ဆွဲကြိုး)</span></label>
+              <label class="filter-option"><input type="radio" name="category" value="bracelets"> Bracelets <span lang="my">(လက်ကောက်)</span></label>
+              <label class="filter-option"><input type="radio" name="category" value="earrings"> Earrings <span lang="my">(နားကပ်)</span></label>
+            </div>
+            <div class="filter-block">
+              <h4>Material</h4>
+              <label class="filter-option"><input type="checkbox" name="material" value="22k-gold"> 22K Gold</label>
+              <label class="filter-option"><input type="checkbox" name="material" value="18k-gold"> 18K Gold</label>
+              <label class="filter-option"><input type="checkbox" name="material" value="gold-plated"> Gold Plated</label>
+              <label class="filter-option"><input type="checkbox" name="material" value="gemstone"> Gold &amp; Gemstone</label>
+            </div>
+            <button type="button" class="btn btn--outline btn--sm btn--block" id="clear-filters">Clear Filters</button>
           </div>
-          <div class="filter-block">
-            <h4>Material</h4>
-            <label class="filter-option"><input type="checkbox" name="material" value="22k-gold"> 22K Gold</label>
-            <label class="filter-option"><input type="checkbox" name="material" value="18k-gold"> 18K Gold</label>
-            <label class="filter-option"><input type="checkbox" name="material" value="gold-plated"> Gold Plated</label>
-            <label class="filter-option"><input type="checkbox" name="material" value="gemstone"> Gold &amp; Gemstone</label>
-          </div>
-          <button type="button" class="btn btn--outline btn--sm btn--block" id="clear-filters">Clear Filters</button>
         </aside>
 
         <div>
