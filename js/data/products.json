@@ -7,12 +7,14 @@
     "material": "22k-gold",
     "isNew": true,
     "isFeatured": false,
-    "images": [],
+    "images": [
+      "images/products/new-product-7/1789441200937-t8vlt.jpg"
+    ],
     "shortDescription": "",
     "description": "",
     "tags": [],
     "createdAt": "2026-09-15T02:57:42.478Z",
-    "updatedAt": "2026-09-15T02:57:42.478Z"
+    "updatedAt": "2026-09-15T03:00:02.461Z"
   },
   {
     "id": "new-product-6",
