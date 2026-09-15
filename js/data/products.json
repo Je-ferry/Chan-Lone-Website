@@ -1,7 +1,7 @@
 [
   {
     "id": "new-product-7",
-    "name": "New Product",
+    "name": "Earring 2",
     "nameBurmese": "",
     "category": "rings",
     "material": "22k-gold",
@@ -11,11 +11,11 @@
       "images/products/new-product-7/1789441200937-t8vlt.jpg",
       "images/products/new-product-7/1789441203348-ohdsb.jpg"
     ],
-    "shortDescription": "",
+    "shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "description": "",
     "tags": [],
     "createdAt": "2026-09-15T02:57:42.478Z",
-    "updatedAt": "2026-09-15T03:00:04.413Z"
+    "updatedAt": "2026-09-15T03:00:12.623Z"
   },
   {
     "id": "new-product-6",
