@@ -13,6 +13,21 @@ server-rendering, no bundler, and no CI/build step.
   templating available without a build step or server). When changing the
   header/footer/nav, update it in all HTML files: index, shop, product,
   wishlist, about, contact. (`admin.html` is exempt — see below.)
+- The header's `.header-start` wrapper holds a back button
+  (`[data-back-btn]`, an `.icon-btn` with a left-arrow icon) next to the
+  `.brand` logo, on every customer-facing page. Its click behavior is
+  wired once in `js/partials.js` (`wireBackButton()`): `history.back()`
+  when there's history to go back to, else it falls back to `index.html`
+  — keep that fallback if you touch it, since the button also appears on
+  `index.html` itself where there's often no in-site history.
+- On `shop.html`, the category/material filter sidebar (`#filter-sidebar`)
+  is hidden by default under 1024px width, behind a plain "Filters"
+  toggle button (`#filter-toggle`) that sits in its own row above
+  `.sort-bar` — so the product grid, not the filters, is the first thing
+  visible when a customer lands on the shop page from a phone. Toggling
+  is wired in `js/shop.js` (adds/removes `.is-open` on `#filter-sidebar`).
+  The desktop layout (sidebar always visible, toggle hidden) is untouched
+  above 1024px.
 - `js/data/taxonomy.js` holds the static `CATEGORIES`/`MATERIALS` arrays
   (rarely change, hand-edited). Product data itself (`PRODUCTS`) is NOT
   hand-edited — it's fetched at runtime from `js/data/products.json` via
@@ -81,6 +96,22 @@ server-rendering, no bundler, and no CI/build step.
   `.is-active` state, so manual picks and the auto-rotate timer don't
   fight each other. Keep new multi-photo UI going through this shared
   state instead of adding a separate current-index variable.
+- Every customer-facing page's `<head>` loads `css/layout.css` **before**
+  `css/components.css`. If the same selector's base rule (e.g. a
+  `display: none` default for something shown only via a media query)
+  ends up split across both files, the later file wins regardless of the
+  media query, since both are plain classes at equal specificity — this
+  silently hid the mobile shop-filter toggle once already. Keep a
+  responsive show/hide pair (base rule + its media-query override) inside
+  a single file, ideally `layout.css`.
+- Inline `<svg>` icons need an explicit size — either width/height
+  attributes or a CSS rule like `.icon-btn svg { width: 20px; height:
+  20px; }` (see `layout.css`). An unsized svg inside a `display:flex` /
+  `inline-flex` icon button can collapse to 0×0 on mobile Safari even
+  though it renders fine in desktop dev tools' mobile emulation — this is
+  what made the `.nav-toggle` hamburger icon invisible on real phones
+  until `.nav-toggle svg` got explicit dimensions. Size any new icon
+  button's svg the same way.
 
 ## Product data backend (GitHub Contents API)
 - **`js/data/products.json`** holds the whole product catalog as a plain
