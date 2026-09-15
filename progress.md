@@ -36,6 +36,9 @@
   layouts on mobile Safari)
 - Added a back button (browser back, or home if there's no history) next
   to the logo in the header on every page
+- Fixed the Burmese header logo breaking mid-word ("ရွှေ" / "ဆိုင်" split
+  onto separate lines) on narrow screens — the trailing "ရွှေဆိုင်" now
+  wraps as one unit
 
 ## TODO before this goes live for real customers
 - [ ] Delete the blank "New Product" test entry in `admin.html` (created while testing the GitHub connection — no real content, safe to remove)

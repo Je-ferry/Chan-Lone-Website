@@ -77,7 +77,10 @@ server-rendering, no bundler, and no CI/build step.
   line-height, `.brand__name[lang="my"]` in `css/layout.css` overrides
   `line-height`/`margin-bottom` so its diacritics don't collide with the
   `.brand__sub` line below — keep that override if the header markup
-  changes.
+  changes. Within `.brand__name`, the trailing "ရွှေဆိုင်" ("gold shop")
+  is wrapped in its own `<span style="white-space:nowrap">` so a line
+  break on narrow screens can only fall before it, never inside it —
+  keep that inner span if the business name markup changes.
 - `about.html`'s story section pairs each English paragraph with its
   Burmese translation directly beneath it (`lang="my"`), matching the
   English-primary/Burmese-secondary pattern used for product names.
