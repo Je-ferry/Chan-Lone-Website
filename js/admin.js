@@ -284,13 +284,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var fileInput = card.querySelector("[data-file-input]");
     var uploadingEl = card.querySelector("[data-uploading]");
-    fileInput.addEventListener("change", function () {
-      var file = fileInput.files[0];
-      if (!file) return;
-      uploadingEl.hidden = false;
-      compressImageToFit(file).then(function (dataUrl) {
+
+    // One photo, start to finish: compress, commit the file, then commit
+    // the updated `images` array referencing it.
+    function uploadOnePhoto(file) {
+      return compressImageToFit(file).then(function (dataUrl) {
         var base64 = dataUrl.split(",")[1];
-        var path = "images/products/" + product.id + "/" + Date.now() + ".jpg";
+        var path = "images/products/" + product.id + "/" + Date.now() + "-" + Math.random().toString(36).slice(2, 7) + ".jpg";
         return GH.putFile(path, base64, { message: "Add photo for " + (product.name || product.id) }).then(function () {
           return commitProducts(function (current) {
             return current.map(function (p) {
@@ -301,17 +301,47 @@ document.addEventListener("DOMContentLoaded", function () {
           }, "Add photo reference for " + (product.name || product.id));
         }).then(function (updated) {
           photoPreviews[path] = dataUrl;
-          return updated;
+          var updatedProduct = updated.find(function (p) { return p.id === product.id; });
+          Object.assign(product, updatedProduct);
+          renderMedia(card, product, photoPreviews);
+          renderThumbs(card, product, photoPreviews);
         });
-      }).then(function (updated) {
-        var updatedProduct = updated.find(function (p) { return p.id === product.id; });
-        Object.assign(product, updatedProduct);
-        renderMedia(card, product, photoPreviews);
-        renderThumbs(card, product, photoPreviews);
-      }).catch(function (err) {
-        handleWriteError(err, "Photo upload failed");
+      });
+    }
+
+    fileInput.addEventListener("change", function () {
+      var files = Array.prototype.slice.call(fileInput.files);
+      if (!files.length) return;
+      uploadingEl.hidden = false;
+
+      // Multiple photos go up one at a time, not in parallel — commitProducts
+      // is read-modify-write against products.json, and parallel writes would
+      // race each other's sha and stomp images added by earlier uploads.
+      var failures = [];
+      var authFailed = false;
+      var chain = Promise.resolve();
+      files.forEach(function (file, i) {
+        chain = chain.then(function () {
+          if (authFailed) return;
+          uploadingEl.textContent = files.length > 1 ? "Uploading " + (i + 1) + " of " + files.length + "…" : "Uploading…";
+          return uploadOnePhoto(file).catch(function (err) {
+            if (err && err.message === "INVALID_TOKEN") {
+              authFailed = true;
+              resetToLogin("Your token is invalid or expired — reconnect.");
+              return;
+            }
+            var reason = err && err.message === "CONFLICT" ? "someone else changed the catalog" : (err && err.message ? err.message : String(err));
+            failures.push((file.name || "photo " + (i + 1)) + ": " + reason);
+          });
+        });
+      });
+      chain.then(function () {
+        if (failures.length) {
+          alert("Some photos failed to upload:\n" + failures.join("\n"));
+        }
       }).finally(function () {
         uploadingEl.hidden = true;
+        uploadingEl.textContent = "Uploading…";
         fileInput.value = "";
       });
     });
