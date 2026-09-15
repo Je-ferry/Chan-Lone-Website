@@ -7,12 +7,14 @@
     "material": "22k-gold",
     "isNew": true,
     "isFeatured": false,
-    "images": [],
+    "images": [
+      "images/products/new-product-6/1789440912797-hy6g9.jpg"
+    ],
     "shortDescription": "",
     "description": "",
     "tags": [],
     "createdAt": "2026-09-15T02:53:02.883Z",
-    "updatedAt": "2026-09-15T02:53:02.883Z"
+    "updatedAt": "2026-09-15T02:55:14.013Z"
   },
   {
     "id": "new-product-5",
