@@ -3,7 +3,7 @@
     "id": "new-product-7",
     "name": "Earring 2",
     "nameBurmese": "",
-    "category": "rings",
+    "category": "earrings",
     "material": "22k-gold",
     "isNew": true,
     "isFeatured": false,
@@ -15,7 +15,7 @@
     "description": "",
     "tags": [],
     "createdAt": "2026-09-15T02:57:42.478Z",
-    "updatedAt": "2026-09-15T03:00:33.581Z"
+    "updatedAt": "2026-09-15T03:00:37.288Z"
   },
   {
     "id": "new-product-6",
