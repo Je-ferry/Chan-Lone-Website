@@ -8,13 +8,14 @@
     "isNew": true,
     "isFeatured": false,
     "images": [
-      "images/products/new-product-4/1789439882602-x8c7e.jpg"
+      "images/products/new-product-4/1789439882602-x8c7e.jpg",
+      "images/products/new-product-4/1789439884632-ivhp6.jpg"
     ],
     "shortDescription": "",
     "description": "",
     "tags": [],
     "createdAt": "2026-09-15T02:37:15.545Z",
-    "updatedAt": "2026-09-15T02:38:03.658Z"
+    "updatedAt": "2026-09-15T02:38:06.004Z"
   },
   {
     "id": "new-product-3",
