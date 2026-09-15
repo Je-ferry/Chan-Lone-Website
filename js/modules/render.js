@@ -17,10 +17,37 @@ window.ChanLoneRender = (function () {
 
   function productMedia(product, opts) {
     if (product.images && product.images.length > 0) {
+      if (product.images.length > 1) {
+        var imgsHtml = product.images.map(function (src, i) {
+          return '<img src="' + src + '" alt="' + U.escapeHtml(product.name) + '"' + (i === 0 ? ' class="is-active"' : "") + " />";
+        }).join("");
+        return '<div class="product-media-rotator">' + imgsHtml + "</div>";
+      }
       return '<img src="' + product.images[0] + '" alt="' + U.escapeHtml(product.name) + '" />';
     }
     return placeholderMedia(product, opts);
   }
+
+  // One shared timer advances every rotator currently in the DOM, rather
+  // than a setInterval per card — grids re-render often (filtering,
+  // sorting), and per-element timers would keep ticking against detached
+  // nodes after each re-render unless individually torn down.
+  var ROTATE_INTERVAL_MS = 3000;
+  function startMediaRotation() {
+    setInterval(function () {
+      document.querySelectorAll(".product-media-rotator").forEach(function (el) {
+        var imgs = el.querySelectorAll("img");
+        if (imgs.length < 2) return;
+        var activeIdx = 0;
+        for (var i = 0; i < imgs.length; i++) {
+          if (imgs[i].classList.contains("is-active")) { activeIdx = i; break; }
+        }
+        imgs[activeIdx].classList.remove("is-active");
+        imgs[(activeIdx + 1) % imgs.length].classList.add("is-active");
+      });
+    }, ROTATE_INTERVAL_MS);
+  }
+  startMediaRotation();
 
   function wishlistButtonHtml(product) {
     var active = window.ChanLoneWishlist && window.ChanLoneWishlist.isInWishlist(product.id);
