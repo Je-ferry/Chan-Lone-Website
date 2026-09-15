@@ -1,7 +1,7 @@
 /**
  * One-time starter catalog, used only by admin.html's "Import Starter
- * Catalog" button to seed Firestore with placeholder products you can
- * then edit/replace with real ones. Not loaded by any public page.
+ * Catalog" button to seed js/data/products.json with placeholder products
+ * you can then edit/replace with real ones. Not loaded by any public page.
  * `nameBurmese` values are placeholder translations -- review and replace.
  */
 window.SEED_PRODUCTS = [

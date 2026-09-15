@@ -24,7 +24,7 @@
     </div>
     <div class="admin-header__actions">
       <span id="admin-user-email" class="admin-header__email" hidden></span>
-      <button type="button" class="btn btn--outline btn--sm" id="admin-logout" hidden>Log Out</button>
+      <button type="button" class="btn btn--outline btn--sm" id="admin-logout" hidden>Disconnect</button>
       <a href="index.html" class="btn btn--ghost btn--sm">&larr; Back to site</a>
     </div>
   </div>
@@ -33,30 +33,26 @@
 <main>
   <div class="container">
 
-    <!-- ---- Login screen ---- -->
+    <!-- ---- Connect screen ---- -->
     <section id="admin-login" class="admin-login" hidden>
       <div class="admin-login__box">
-        <h2>Sign In</h2>
-        <p class="admin-login__hint">This dashboard is protected by Firebase Authentication. Only the one admin account created for this project (see FIREBASE_SETUP.md) can sign in and make changes.</p>
+        <h2>Connect</h2>
+        <p class="admin-login__hint">This dashboard writes directly to this project's GitHub repo. Paste your personal access token below to connect (see GITHUB_SETUP.md if you don't have one yet). It's stored only in this browser.</p>
         <form id="admin-login-form">
           <div class="admin-field">
-            <label for="admin-email">Email</label>
-            <input type="email" id="admin-email" autocomplete="username" required>
-          </div>
-          <div class="admin-field">
-            <label for="admin-password">Password</label>
-            <input type="password" id="admin-password" autocomplete="current-password" required>
+            <label for="admin-token">GitHub personal access token</label>
+            <input type="password" id="admin-token" autocomplete="off" placeholder="github_pat_..." required>
           </div>
           <p id="admin-login-error" class="admin-login__error" hidden></p>
-          <button type="submit" class="btn btn--primary btn--block" id="admin-login-submit">Sign In</button>
+          <button type="submit" class="btn btn--primary btn--block" id="admin-login-submit">Connect</button>
         </form>
       </div>
     </section>
 
     <!-- ---- Not-configured screen ---- -->
     <section id="admin-not-configured" class="admin-notice" hidden>
-      <p><strong>Firebase isn't configured yet.</strong> This page can't sign in or load products until <code>js/firebase-config.js</code> has your real Firebase project values.</p>
-      <p>Follow <code>FIREBASE_SETUP.md</code> in the project folder, then reload this page.</p>
+      <p><strong>This admin isn't configured yet.</strong> This page can't connect or load products until <code>js/github-config.js</code> has this repo's real owner/name values.</p>
+      <p>Follow <code>GITHUB_SETUP.md</code> in the project folder, then reload this page.</p>
     </section>
 
     <!-- ---- Dashboard ---- -->
@@ -129,15 +125,12 @@
   </article>
 </template>
 
-<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-storage-compat.js"></script>
-<script src="js/firebase-config.js"></script>
+<script src="js/github-config.js"></script>
 <script src="js/data/taxonomy.js"></script>
 <script src="js/data/seed-products.js"></script>
 <script src="js/modules/utils.js"></script>
 <script src="js/modules/render.js"></script>
+<script src="js/modules/githubApi.js"></script>
 <script src="js/admin.js"></script>
 </body>
 </html>
