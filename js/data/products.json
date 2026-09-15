@@ -1,5 +1,20 @@
 [
   {
+    "id": "new-product-5",
+    "name": "New Product",
+    "nameBurmese": "",
+    "category": "rings",
+    "material": "22k-gold",
+    "isNew": true,
+    "isFeatured": false,
+    "images": [],
+    "shortDescription": "",
+    "description": "",
+    "tags": [],
+    "createdAt": "2026-09-15T02:47:59.058Z",
+    "updatedAt": "2026-09-15T02:47:59.058Z"
+  },
+  {
     "id": "new-product-4",
     "name": "Ring 1",
     "nameBurmese": "",
