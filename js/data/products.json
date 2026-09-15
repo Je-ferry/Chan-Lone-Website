@@ -8,12 +8,13 @@
     "isNew": true,
     "isFeatured": false,
     "images": [
-      "images/products/new-product/1789437317160.jpg"
+      "images/products/new-product/1789437317160.jpg",
+      "images/products/new-product/1789437323530.jpg"
     ],
     "shortDescription": "",
     "description": "",
     "tags": [],
     "createdAt": "2026-09-15T00:13:58.475Z",
-    "updatedAt": "2026-09-15T01:55:19.812Z"
+    "updatedAt": "2026-09-15T01:55:24.622Z"
   }
 ]
