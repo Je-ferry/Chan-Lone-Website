@@ -120,7 +120,13 @@ window.ChanLoneRender = (function () {
     opts = opts || {};
     if (!container || !product) return;
 
+    var images = product.images || [];
     var galleryHtml = productMedia(product, { large: true });
+    var thumbsHtml = images.length > 1
+      ? '<div class="product-detail__thumbs">' + images.map(function (src, i) {
+          return '<button type="button" class="product-detail__thumb' + (i === 0 ? " is-active" : "") + '" data-idx="' + i + '" aria-label="View photo ' + (i + 1) + ' of ' + images.length + '"><img src="' + src + '" alt="" /></button>';
+        }).join("") + "</div>"
+      : "";
     var active = window.ChanLoneWishlist && window.ChanLoneWishlist.isInWishlist(product.id);
     var businessMsg = encodeURIComponent("Hi! I'm interested in the " + product.name + " (" + product.id + ").");
     var messengerUrl = (window.BUSINESS && window.BUSINESS.messengerUrl) || "#";
@@ -129,6 +135,7 @@ window.ChanLoneRender = (function () {
       '<div class="product-detail">' +
         '<div>' +
           '<div class="product-detail__gallery">' + galleryHtml + "</div>" +
+          thumbsHtml +
         "</div>" +
         '<div class="product-detail__info">' +
           '<span class="eyebrow">' + U.escapeHtml(U.categoryLabel(product.category)) +
@@ -157,6 +164,30 @@ window.ChanLoneRender = (function () {
         wishlistBtn.classList.toggle("is-active", isActive);
         wishlistBtn.setAttribute("aria-pressed", isActive ? "true" : "false");
         wishlistBtn.textContent = isActive ? "Saved to Wishlist" : "Add to Wishlist";
+      });
+    }
+
+    if (images.length > 1) {
+      var galleryEl = container.querySelector(".product-detail__gallery");
+      var thumbs = container.querySelectorAll(".product-detail__thumb");
+
+      var showImage = function (idx) {
+        galleryEl.querySelectorAll("img").forEach(function (img, i) { img.classList.toggle("is-active", i === idx); });
+        thumbs.forEach(function (t, i) { t.classList.toggle("is-active", i === idx); });
+      };
+
+      thumbs.forEach(function (t, i) {
+        t.addEventListener("click", function () { showImage(i); });
+      });
+
+      // Click the main photo to step through the rest, same as the thumbs —
+      // the shared rotation timer just reads whichever image is marked
+      // .is-active next tick, so a manual pick slots right into the cycle.
+      galleryEl.addEventListener("click", function () {
+        var imgs = galleryEl.querySelectorAll("img");
+        var current = 0;
+        imgs.forEach(function (img, i) { if (img.classList.contains("is-active")) current = i; });
+        showImage((current + 1) % imgs.length);
       });
     }
   }
